@@ -227,3 +227,74 @@
     background-size: 20px 20px;
     cursor: pointer;
 }
+
+.icon-email,
+.icon-tag,
+.icon-document-check,
+.icon-sb-recruiment-campaign,
+.icon-delete,
+.icon-more-vertical{
+  display: inline-block;
+  vertical-align: middle;
+
+  background-color: #7a8188;
+
+  -webkit-mask-image: url('../assets/icons/ICON.svg');
+  -webkit-mask-repeat: no-repeat;
+
+  mask-image: url('../assets/icons/ICON.svg');
+  mask-repeat: no-repeat;
+}
+
+.icon-email{
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+
+  -webkit-mask-position: -260px -656px;
+  mask-position: -260px -656px;
+}
+
+.icon-tag{
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+
+  -webkit-mask-position: -300px -656px;
+  mask-position: -300px -656px;
+}
+
+.icon-document-check{
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+
+  -webkit-mask-position: -340px -656px;
+  mask-position: -340px -656px;
+}
+
+.icon-sb-recruiment-campaign{
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+
+  -webkit-mask-position: -73px -633px;
+  mask-position: -73px -633px;
+}
+.icon-more-vertical {
+    width: 16x;
+    height: 16px;
+    min-width: 16px;
+-webkit-mask-position: -96px -80px;
+    mask-position: -96px -80px;
+    background-color: #7a8188;
+}
+.icon-delete {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: -220px -656px ;
+    mask-position: -220px -656px;
+    background-color: rgb(255, 0, 0);
+}

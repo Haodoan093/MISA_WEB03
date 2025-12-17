@@ -377,7 +377,7 @@
         <td class="col-recent-work">${safeText(c.recentWork)}</td>
         <td class="col-exploit">${safeText(c.exploiter)}</td>
         <td class="col-unit">${safeText(c.unit)}</td>
-        <td class="col-persona">${safeText(c.personaFit)}</td>
+        <td class="col-persona">${renderPersonaFitBadge(c.personaFit)}</td>
         <td class="col-area">${safeText(c.area)}</td>
         <td class="col-referrer">${safeText(c.referrer)}</td>
         <td class="col-reception-info">${safeText(c.receptionInfo)}</td>
@@ -394,7 +394,6 @@
       })
       .join("");
 
-    // NEW: sync toolbar/header checkbox sau render
     window.CandidatesSelection?.afterRender?.();
   }
 
@@ -461,15 +460,14 @@
     document.addEventListener("candidates:changed", () => {
       // luôn reload từ localStorage để đảm bảo đồng bộ
       const latest = loadCandidates();
-      deps.getAll = () => latest; // cập nhật nguồn (simple)
+      deps.getAll = () => latest; 
       render(latest);
     });
 
-    // 2) Double click row để mở edit
     const tbody = document.querySelector("#candidateTbody");
     if (!tbody) return;
 
-    // CLICK icon edit -> mở popup edit
+
     tbody.addEventListener("click", (e) => {
       const btn = e.target?.closest?.("button[data-action='edit']");
       if (!btn) return;
@@ -492,7 +490,7 @@
       window.CandidateModal?.openForEdit?.(candidate);
     });
 
-    // (optional) nếu không cần dblclick nữa thì bỏ block dblclick cũ
+   
   }
 
   /**
@@ -572,7 +570,58 @@
   });
 })();
 
-// REMOVED: clearSearchInput() global (đã chuyển sang header-actions.js)
+
+
+/**
+ * Map điểm "persona fit" (1..100) sang class CSS để tô màu theo 3 mức:
+ * - >= 70: xanh (good)
+ * - >= 40: cam (medium)
+ * - < 40 : đỏ (bad)
+ *
+ * Nếu giá trị không hợp lệ (NaN/Infinity/undefined/null/...) sẽ trả về chuỗi rỗng.
+ *
+ * @param {number|string|null|undefined} score - Điểm phù hợp (khuyến nghị 1..100).
+ * @returns {string} Tên class CSS:
+ * - "compatibility-level--good"
+ * - "compatibility-level--medium"
+ * - "compatibility-level--bad"
+ * - "" nếu score không hợp lệ.
+ * Created By DCHAO - 17/12/2025
+ */
+function getPersonaFitClass(score) {
+  const n = Number(score);
+  if (!Number.isFinite(n)) return "";
+  if (n >= 70) return "compatibility-level--good"; // xanh
+  if (n >= 40) return "compatibility-level--medium"; // cam
+  return "compatibility-level--bad"; // đỏ
+}
+
+/**
+ * Render HTML badge (pill) hiển thị % "persona fit".
+ *
+ * - Nếu score không hợp lệ -> trả về "—" (fallback text).
+ * - Nếu hợp lệ -> làm tròn và clamp về khoảng 1..100, sau đó render:
+ *   <span class="compatibility-level {class}" title="...">{safe}%</span>
+ *
+ * Lưu ý: Hàm trả về HTML string, dùng để gán vào innerHTML/templating.
+ *
+ * @param {number|string|null|undefined} score - Điểm phù hợp (khuyến nghị 1..100).
+ * @returns {string} HTML string badge hoặc "—" nếu score không hợp lệ.
+ * Created By DCHAO - 17/12/2025
+ */
+function renderPersonaFitBadge(score) {
+  const n = Number(score);
+  if (!Number.isFinite(n)) return "—";
+  const safe = Math.max(1, Math.min(100, Math.round(n)));
+  const cls = getPersonaFitClass(safe);
+  return `
+    <span class="compatibility-level ${cls}" title="Phù hợp với chân dung: ${safe}%">
+      ${safe}%
+    </span>
+  `.trim();
+}
+
+
 
 
 

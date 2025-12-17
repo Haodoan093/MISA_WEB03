@@ -3,6 +3,7 @@
 @import url("./components/toats.css");
 @import url("./components/scroll.css");
 @import url("./components/popup-delete.css");
+@import url("./components/pill.css");
 /* ============================================
    GLOBAL STYLES
    ============================================ */
@@ -1106,4 +1107,5 @@ td.col-actions{ z-index: 2; }
 
 .selection-count{
   font-size: 14px;
+ padding-right: 10px;
 }
