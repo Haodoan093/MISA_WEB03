@@ -1,0 +1,17 @@
+.tag-new {
+  background-color: rgb(38, 128, 235);
+  height: 20px;
+  line-height: 20px;
+  padding: 0px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.tag-new .new-candi {
+  color: rgb(255, 255, 255);
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}

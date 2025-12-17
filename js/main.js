@@ -358,7 +358,10 @@
         <td class="col-name">
           <span class="avatar" style="background-color:${avatarBg(c)}" title="${safeText(c.fullName)}">${initials(c.fullName)}</span>
           <div class="name-block">
-            <div class="name">${safeText(c.fullName)}</div>
+            <div class="name">
+              ${safeText(c.fullName)}
+              ${c?.isNew ? `<span class="tag-new"><span class="new-candi">MỚI</span></span>` : ``}
+            </div>
             <div class="sub">${safeText(c.position)}</div>
           </div>
         </td>

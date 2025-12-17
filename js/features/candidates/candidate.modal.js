@@ -189,7 +189,34 @@ window.CandidateModal = (function () {
 
     return { ok: true };
   }
+/**
+   * Sinh id ứng viên kế tiếp theo format: cand_0001, cand_0002, ...
+   * - Quét max số thứ tự hiện có trong list (ưu tiên id dạng "cand_XXXX")
+   * - Nếu không có thì bắt đầu từ 1
+   * @param {Array<object>} list - Danh sách ứng viên hiện có.
+   * @returns {string} id mới không trùng.
+   */
+  function generateNextCandidateId(list) {
+    const arr = Array.isArray(list) ? list : [];
+    let max = 0;
 
+    for (const item of arr) {
+      const id = String(item?.id ?? "");
+      const m = id.match(/^cand_(\d+)$/i);
+      if (m) {
+        const n = Number(m[1]);
+        if (Number.isFinite(n)) max = Math.max(max, n);
+        continue;
+      }
+
+      // fallback: nếu id là số "123" thì vẫn tính
+      const n2 = Number(id);
+      if (Number.isFinite(n2)) max = Math.max(max, n2);
+    }
+
+    const next = max + 1;
+    return `cand_${String(next).padStart(4, "0")}`;
+  }
   /**
    * Tạo mới ứng viên: lưu vào đầu danh sách localStorage.
    * @param {object} payload - Dữ liệu từ form.
@@ -198,7 +225,6 @@ window.CandidateModal = (function () {
   function createCandidate(payload) {
     const list = getCandidates();
 
-    // IMPORTANT: spread payload trước, set id SAU để không bị payload.id="" ghi đè
     const candidate = {
       // payload từ modal
       ...payload,
@@ -216,6 +242,9 @@ window.CandidateModal = (function () {
       personaFit: payload.personaFit ?? "",
       receptionInfo: payload.receptionInfo ?? "",
       talentPool: payload.talentPool ?? "",
+
+      // NEW: đánh dấu ứng viên vừa thêm
+      isNew: true,
     };
 
     list.unshift(candidate);
