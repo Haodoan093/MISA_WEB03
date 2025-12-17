@@ -91,6 +91,21 @@
   background: #59c36a;
 }
 
+/* Error (đỏ) */
+.misa-toast--error{
+  background: #d92d20;
+}
+
+/* Warning (cam) */
+.misa-toast--warning{
+  background: #f08c00;
+}
+
+/* Info (xanh dương) */
+.misa-toast--info{
+  background: #2563eb;
+}
+
 /* Icon tròn trắng + dấu tick xanh */
 .misa-toast__icon{
   width: 34px;
@@ -105,6 +120,19 @@
 
   /* inline SVG tick green */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M20 6L9 17l-5-5' stroke='%232da44e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* icon theo type */
+.misa-toast--error .misa-toast__icon{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M18 6L6 18' stroke='%23d92d20' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M6 6l12 12' stroke='%23d92d20' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.misa-toast--warning .misa-toast__icon{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 3l10 18H2L12 3z' stroke='%23f08c00' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M12 9v5' stroke='%23f08c00' stroke-width='2.8' stroke-linecap='round'/%3E%3Cpath d='M12 17h.01' stroke='%23f08c00' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.misa-toast--info .misa-toast__icon{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2a10 10 0 1010 10A10 10 0 0012 2z' stroke='%232563eb' stroke-width='2.4'/%3E%3Cpath d='M12 10v6' stroke='%232563eb' stroke-width='2.8' stroke-linecap='round'/%3E%3Cpath d='M12 7h.01' stroke='%232563eb' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 .misa-toast__message{
